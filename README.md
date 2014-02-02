@@ -1,9 +1,7 @@
-(PLUGIN AUTHOR: Please read [Plugin README conventions](https://github.com/wearefractal/gulp/wiki/Plugin-README-Conventions), then delete this line)
-
 # gulp-filelog
 [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status](coveralls-image)](coveralls-url) [![Dependency Status][depstat-image]][depstat-url]
 
-> filelog plugin for [gulp](https://github.com/wearefractal/gulp)
+> A [gulp](https://github.com/wearefractal/gulp) plugin that logs out the file names in the stream. Displays a count and if empty. Useful for debugging.
 
 ## Usage
 
@@ -15,13 +13,23 @@ npm install --save-dev gulp-filelog
 
 Then, add it to your `gulpfile.js`:
 
+**Output the file names in the stream**
+
 ```javascript
 var filelog = require("gulp-filelog");
 
 gulp.src("./src/*.ext")
-	.pipe(filelog({
-		msg: "Hello Gulp!"
-	}))
+    .pipe(filelog())
+	.pipe(gulp.dest("./dist"));
+```
+
+**Output the file names in the stream with a task name identifier**
+
+```javascript
+var filelog = require("gulp-filelog");
+
+gulp.src("./src/*.ext")
+    .pipe(filelog('someTask'))
 	.pipe(gulp.dest("./dist"));
 ```
 
