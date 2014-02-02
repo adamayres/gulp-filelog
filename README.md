@@ -1,5 +1,5 @@
 # gulp-filelog
-[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
+[![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url]  [![Coverage Status][coveralls-image]][coveralls-url] [![Dependency Status][depstat-image]][depstat-url]
 
 > A [gulp](https://github.com/wearefractal/gulp) plugin that logs out the file names in the stream. Displays a count and if empty. Useful for debugging.
 
