@@ -35,14 +35,12 @@ gulp.src("./src/*.ext")
 
 ## API
 
-### filelog(options)
+### filelog([task])
 
-#### options.msg
-Type: `String`  
-Default: `Hello World`
+#### task
+Type: `String`
 
-The message you wish to attach to file.
-
+The name of original task, this will be outputted to the stdout along with the file name.
 
 ## License
 
