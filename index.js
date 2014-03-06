@@ -29,8 +29,9 @@ module.exports = function filelog (taskParam) {
 
     this.push(file);
     return callback();
-  }, function () {
+  }, function (cb) {
     var task = taskParam ? decorate('blue', taskParam) + ' ' : '';
     gutil.log(task +  'Found ' + decorate('yellow', count) + ' files.');
+    cb();
   });
 };
