@@ -1,6 +1,6 @@
 {
   "name": "gulp-filelog",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "A gulp plugin that logs out the file names in the stream. Displays a count and if empty. Useful for debugging.",
   "keywords": [
     "gulpplugin", "filelog", "debug", "count", "empty", "log", "gulp"
