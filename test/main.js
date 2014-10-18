@@ -4,6 +4,7 @@ var fs = require('fs');
 var should = require('should');
 var gutil = require('gulp-util');
 var filelog = require('../');
+var date = require('dateformat');
 
 require('mocha');
 
@@ -12,6 +13,10 @@ describe('gulp-filelog', function () {
   var originalStdoutWrite;
   var srcFile1;
   var srcFile2;
+
+  function createTime () {
+    return '[' + gutil.colors.grey(date(new Date(), 'HH:MM:ss')) + ']';
+  }
 
   beforeEach(function () {
     writtenValue = null;
@@ -41,34 +46,8 @@ describe('gulp-filelog', function () {
   it('should produce expected file via buffer', function (done) {
     var task = 'testTask';
     var streamCount = 0;
-		var stream = filelog(task);
-
-		stream.on('error', function(err) {
-			should.exist(err);
-			done(err);
-		});
-
-    stream.on('data', function () {
-      streamCount++;
-
-      if (streamCount === 1) {
-        writtenValue.should.eql('[' + gutil.colors.green('gulp') + '] [' + gutil.colors.blue(task) + '] [' + gutil.colors.yellow('1') + '] [' + gutil.colors.cyan('test/fixtures/1.txt') + ']\n');
-      } else if (streamCount === 2) {
-        writtenValue.should.eql('[' + gutil.colors.green('gulp') + '] [' + gutil.colors.blue(task) + '] [' + gutil.colors.yellow('2') + '] [' + gutil.colors.cyan('test/fixtures/2.txt') + '] [' + gutil.colors.magenta('EMPTY') + ']\n');
-      }
-    });
-
-    stream.write(srcFile1);
-    stream.write(srcFile2);
-    stream.end();
-
-    writtenValue.should.eql('[' + gutil.colors.green('gulp') + '] [' + gutil.colors.blue(task) + '] Found [' + gutil.colors.yellow('2') + '] files.\n');
-    done();
-	});
-
-  it('should handle when no task name is specified', function (done) {
-    var streamCount = 0;
-    var stream = filelog();
+    var stream = filelog(task);
+    var time = createTime();
 
     stream.on('error', function(err) {
       should.exist(err);
@@ -79,9 +58,9 @@ describe('gulp-filelog', function () {
       streamCount++;
 
       if (streamCount === 1) {
-        writtenValue.should.eql('[' + gutil.colors.green('gulp') + '] [' + gutil.colors.yellow('1') + '] [' + gutil.colors.cyan('test/fixtures/1.txt') + ']\n');
+        writtenValue.should.eql(time + ' [' + gutil.colors.blue(task) + '] [' + gutil.colors.yellow('1') + '] [' + gutil.colors.cyan('test/fixtures/1.txt') + ']\n');
       } else if (streamCount === 2) {
-        writtenValue.should.eql('[' + gutil.colors.green('gulp') + '] [' + gutil.colors.yellow('2') + '] [' + gutil.colors.cyan('test/fixtures/2.txt') + '] [' + gutil.colors.magenta('EMPTY') + ']\n');
+        writtenValue.should.eql(time + ' [' + gutil.colors.blue(task) + '] [' + gutil.colors.yellow('2') + '] [' + gutil.colors.cyan('test/fixtures/2.txt') + '] [' + gutil.colors.magenta('EMPTY') + ']\n');
       }
     });
 
@@ -89,7 +68,35 @@ describe('gulp-filelog', function () {
     stream.write(srcFile2);
     stream.end();
 
-    writtenValue.should.eql('[' + gutil.colors.green('gulp') + '] Found [' + gutil.colors.yellow('2') + '] files.\n');
+    writtenValue.should.eql(time + ' [' + gutil.colors.blue(task) + '] Found [' + gutil.colors.yellow('2') + '] files.\n');
+    done();
+	});
+
+  it('should handle when no task name is specified', function (done) {
+    var streamCount = 0;
+    var stream = filelog();
+    var time = createTime();
+
+    stream.on('error', function(err) {
+      should.exist(err);
+      done(err);
+    });
+
+    stream.on('data', function () {
+      streamCount++;
+
+      if (streamCount === 1) {
+        writtenValue.should.eql(time + ' [' + gutil.colors.yellow('1') + '] [' + gutil.colors.cyan('test/fixtures/1.txt') + ']\n');
+      } else if (streamCount === 2) {
+        writtenValue.should.eql(time + ' [' + gutil.colors.yellow('2') + '] [' + gutil.colors.cyan('test/fixtures/2.txt') + '] [' + gutil.colors.magenta('EMPTY') + ']\n');
+      }
+    });
+
+    stream.write(srcFile1);
+    stream.write(srcFile2);
+    stream.end();
+
+    writtenValue.should.eql(time + ' Found [' + gutil.colors.yellow('2') + '] files.\n');
     done();
   });
 

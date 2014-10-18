@@ -3,7 +3,13 @@
   "version": "0.4.0",
   "description": "A gulp plugin that logs out the file names in the stream. Displays a count and if empty. Useful for debugging.",
   "keywords": [
-    "gulpplugin", "filelog", "debug", "count", "empty", "log", "gulp"
+    "gulpplugin",
+    "filelog",
+    "debug",
+    "count",
+    "empty",
+    "log",
+    "gulp"
   ],
   "homepage": "https://github.com/adamayres/gulp-filelog",
   "bugs": "https://github.com/adamayres/gulp-filelog/issues",
@@ -26,16 +32,17 @@
     "gulp-util": "~2.2.0"
   },
   "devDependencies": {
-    "mocha": "*",
     "coveralls": "*",
-    "mocha-lcov-reporter": "*",
-    "istanbul": "*",
+    "dateformat": "^1.0.8",
     "event-stream": "*",
+    "istanbul": "*",
+    "mocha": "*",
+    "mocha-lcov-reporter": "*",
     "should": "~2.1.0"
   },
   "engines": {
     "node": ">=0.10",
-	"npm": ">=1.4.3"
+    "npm": ">=1.4.3"
   },
   "licenses": [
     {
