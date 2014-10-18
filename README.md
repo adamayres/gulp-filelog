@@ -16,21 +16,21 @@ Then, add it to your `gulpfile.js`:
 **Output the file names in the stream**
 
 ```javascript
-var filelog = require("gulp-filelog");
+var filelog = require('gulp-filelog');
 
-gulp.src("./src/*.ext")
+gulp.src('./src/*.ext')
     .pipe(filelog())
-	.pipe(gulp.dest("./dist"));
+	.pipe(gulp.dest('./dist'));
 ```
 
 **Output the file names in the stream with a task name identifier**
 
 ```javascript
-var filelog = require("gulp-filelog");
+var filelog = require('gulp-filelog');
 
-gulp.src("./src/*.ext")
+gulp.src('./src/*.ext')
     .pipe(filelog('someTask'))
-	.pipe(gulp.dest("./dist"));
+	.pipe(gulp.dest('./dist'));
 ```
 
 ## API
