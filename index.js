@@ -31,7 +31,7 @@ module.exports = function filelog (taskParam) {
     return callback();
   }, function (cb) {
     var task = taskParam ? decorate('blue', taskParam) + ' ' : '';
-    gutil.log(task +  'Found ' + decorate('yellow', count) + ' files.');
+    gutil.log(task + 'Found ' + decorate('yellow', count.toString()) + ' files.');
     cb();
   });
 };
