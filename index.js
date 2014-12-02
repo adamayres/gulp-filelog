@@ -10,7 +10,7 @@ module.exports = function filelog (taskParam) {
     return text ? '[' + gutil.colors[color](text) + ']' : '';
   }
 
-  return through.obj(function (file, enc, callback) {
+  var stream = through.obj(function (file, enc, callback) {
     var items = [];
     count++;
 
@@ -34,4 +34,8 @@ module.exports = function filelog (taskParam) {
     gutil.log(task + 'Found ' + decorate('yellow', count.toString()) + ' files.');
     cb();
   });
+
+  stream.resume();
+
+  return stream;
 };
