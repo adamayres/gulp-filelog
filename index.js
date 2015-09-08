@@ -1,5 +1,6 @@
 'use strict';
 
+var path = require('path');
 var through = require('through2');
 var gutil = require('gulp-util');
 
@@ -19,7 +20,7 @@ module.exports = function filelog (taskParam) {
     }
 
     items.push(decorate('yellow', count));
-    items.push(decorate('cyan', file.path));
+    items.push(decorate('cyan', path.relative(process.cwd(), file.path)));
 
     if (file.isNull()) {
       items.push(decorate('magenta', 'EMPTY'));
